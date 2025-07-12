@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SphereBlog.Data;
+using SphereBlog.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Add the response wrapper middleware
+app.UseMiddleware<ResponseWrapperMiddleware>();
 
 app.UseAuthorization();
 
