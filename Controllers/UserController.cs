@@ -89,5 +89,20 @@ namespace SphereBlog.Controllers
             _context.SaveChanges();
             return ApiSuccess("Password updated successfully");
         }
+
+        [HttpDelete("delete/{id}")]
+        public IActionResult DeleteUser([FromRoute] int id)
+        {
+            var user = _context.Users.Find(id);
+            if (user == null)
+            {
+                return ApiNotFound($"User with ID {id} not found");
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return ApiSuccess("User deleted successfully");
+        }
     }
 }
